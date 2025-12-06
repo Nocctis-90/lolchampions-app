@@ -15,7 +15,7 @@ public class ChampionController {
         this.lolService = lolService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/champions")
     public String getChampions(Model model) {
         model.addAttribute("champions", lolService.getChampions());
         model.addAttribute("version", lolService.getVersion());

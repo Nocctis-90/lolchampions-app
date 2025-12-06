@@ -4,6 +4,8 @@ import com.example.lol.model.Champion;
 import com.example.lol.model.ChampionResponse;
 import com.example.lol.model.ChampionDetail;
 import com.example.lol.model.ChampionDetailResponse;
+import com.example.lol.model.Item;
+import com.example.lol.model.ItemResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
@@ -53,5 +55,16 @@ public class LolService {
             return response.getData().get(championId);
         }
         return null;
+    }
+
+    public java.util.List<Item> getItems() {
+        String version = getLatestVersion();
+        String url = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/en_US/item.json", version);
+        ItemResponse response = restTemplate.getForObject(url, ItemResponse.class);
+
+        if (response != null && response.getData() != null) {
+            return new ArrayList<>(response.getData().values());
+        }
+        return new ArrayList<>();
     }
 }

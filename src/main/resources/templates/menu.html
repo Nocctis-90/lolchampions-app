@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>League of Legends Wiki</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, #0a1428, #091428);
+            border: 1px solid #c8aa6e;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(200, 170, 110, 0.3);
+            background: linear-gradient(135deg, #1e282d, #0a1428);
+        }
+
+        .menu-card h2 {
+            color: #f0e6d2;
+            font-size: 2rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .menu-card p {
+            color: #a09b8c;
+            margin-top: 15px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, #1e2328 0%, #010a13 100%);
+            border-bottom: 2px solid #c8aa6e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero-section">
+        <div class="container">
+            <h1 style="font-size: 4rem; color: #f0e6d2; text-shadow: 0 0 20px rgba(200, 170, 110, 0.5); margin: 0;">
+                LEAGUE OF LEGENDS</h1>
+            <p style="color: #c8aa6e; font-size: 1.2rem; margin-top: 20px;">Wiki & Database • Patch <span
+                    th:text="${version}"></span></p>
+        </div>
+    </div>
+
+    <div class="menu-grid">
+        <a th:href="@{/champions}" class="menu-card">
+            <h2>Champions</h2>
+            <p>Explore abilities, lore, and skins for all champions.</p>
+        </a>
+        <a th:href="@{/items}" class="menu-card">
+            <h2>Items</h2>
+            <p>Browse in-game items, stats, and recipes.</p>
+        </a>
+        <a href="#" class="menu-card" style="opacity: 0.5; cursor: not-allowed;">
+            <h2>Maps</h2>
+            <p>Coming Soon</p>
+        </a>
+        <a href="#" class="menu-card" style="opacity: 0.5; cursor: not-allowed;">
+            <h2>Masteries</h2>
+            <p>Coming Soon</p>
+        </a>
+        <a href="#" class="menu-card" style="opacity: 0.5; cursor: not-allowed;">
+            <h2>Summoner Spells</h2>
+            <p>Coming Soon</p>
+        </a>
+    </div>
+</body>
+
+</html>

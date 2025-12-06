@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>League of Legends Items</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .item-card {
+            background: #0a1428;
+            border: 1px solid #1e282d;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .item-card:hover {
+            transform: scale(1.1);
+            border-color: #c8aa6e;
+            z-index: 10;
+        }
+
+        .item-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #010a13;
+            border: 2px solid #c8aa6e;
+            color: #d0d0d0;
+            padding: 10px;
+            width: 300px;
+            z-index: 100;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .item-card:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip h3 {
+            color: #f0e6d2;
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .tooltip .gold {
+            color: #e6c13e;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .tooltip .description {
+            line-height: 1.4;
+        }
+
+        /* Make tags behave nicely in description */
+        .tooltip .description mainText {
+            display: block;
+        }
+
+        .tooltip .description stats {
+            color: #88ccee;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .tooltip .description attention {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .tooltip .description passive {
+            color: #ffffff;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .tooltip .description active {
+            color: #ffffff;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .nav-header {
+            padding: 20px;
+            background: #091428;
+            border-bottom: 1px solid #c8aa6e;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-link {
+            color: #c8aa6e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #f0e6d2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-header">
+        <div class="container" style="display: flex; justify-content: space-between; width: 100%;">
+            <a th:href="@{/}" class="nav-link">← Back to Menu</a>
+            <h1 style="margin: 0; font-size: 1.5rem; color: #f0e6d2;">Items</h1>
+            <span>v<span th:text="${version}"></span></span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="item-grid">
+            <div th:each="item : ${items}" class="item-card" th:if="${item.image != null}">
+                <img th:src="@{'https://ddragon.leagueoflegends.com/cdn/' + ${version} + '/img/item/' + ${item.image.full}}"
+                    th:alt="${item.name}">
+
+                <div class="tooltip">
+                    <h3 th:text="${item.name}">Item Name</h3>
+                    <span class="gold" th:text="${item.gold['total']} + ' Gold'">Price</span>
+                    <div class="description" th:utext="${item.description}">Description</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
