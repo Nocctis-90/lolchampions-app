@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${champion.name} + ' - League of Legends'">Champion Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #c8aa6e;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #f0e6d2;
+        }
+
+        .champion-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            background: #0a1428;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #1e282d;
+        }
+
+        .champion-splash {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .champion-splash img {
+            width: 100%;
+            border-radius: 4px;
+            border: 2px solid #c8aa6e;
+        }
+
+        .champion-main-info {
+            flex: 1;
+        }
+
+        .champion-main-info h1 {
+            margin: 0 0 10px 0;
+            font-size: 3rem;
+            color: #f0e6d2;
+            text-shadow: 0 0 10px rgba(200, 170, 110, 0.5);
+        }
+
+        .champion-main-info .subtitle {
+            color: #a09b8c;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .lore {
+            background: #091428;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 3px solid #c8aa6e;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #a09b8c;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #f0e6d2;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #c8aa6e;
+        }
+
+        .passive-section {
+            background: #0a1428;
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #1e282d;
+            margin-bottom: 20px;
+        }
+
+        .passive-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .passive-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 4px;
+            border: 2px solid #c8aa6e;
+        }
+
+        .passive-name {
+            font-size: 1.5rem;
+            color: #f0e6d2;
+            font-weight: bold;
+        }
+
+        .spells-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .spell-card {
+            background: #0a1428;
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #1e282d;
+            transition: border-color 0.3s ease;
+        }
+
+        .spell-card:hover {
+            border-color: #c8aa6e;
+        }
+
+        .spell-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .spell-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 4px;
+            border: 2px solid #c8aa6e;
+        }
+
+        .spell-name {
+            font-size: 1.3rem;
+            color: #f0e6d2;
+            font-weight: bold;
+        }
+
+        .spell-description {
+            color: #a09b8c;
+            line-height: 1.5;
+        }
+
+        .skins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skin-card {
+            background: #0a1428;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #1e282d;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .skin-card:hover {
+            transform: translateY(-5px);
+            border-color: #c8aa6e;
+        }
+
+        .skin-name {
+            color: #f0e6d2;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>League of Legends Champions</h1>
+            <p>Data Dragon API v<span th:text="${version}"></span></p>
+        </div>
+    </header>
+
+    <div class="detail-container">
+        <a th:href="@{/}" class="back-link">← Back to Champions</a>
+
+        <div class="champion-header">
+            <div class="champion-splash">
+                <img th:src="@{'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/' + ${champion.id} + '_0.jpg'}"
+                    th:alt="${champion.name}">
+            </div>
+            <div class="champion-main-info">
+                <h1 th:text="${champion.name}">Champion Name</h1>
+                <p class="subtitle" th:text="${champion.title}">The Title</p>
+                <div class="tags">
+                    <span th:each="tag : ${champion.tags}" th:text="${tag}" class="tag">Tag</span>
+                </div>
+                <div class="lore" th:text="${champion.lore}">Champion lore goes here...</div>
+            </div>
+        </div>
+
+        <!-- Passive -->
+        <h2 class="section-title">Passive Ability</h2>
+        <div class="passive-section" th:if="${champion.passive}">
+            <div class="passive-header">
+                <img class="passive-icon"
+                    th:src="@{'https://ddragon.leagueoflegends.com/cdn/' + ${version} + '/img/passive/' + ${champion.passive.image.full}}"
+                    th:alt="${champion.passive.name}">
+                <div class="passive-name" th:text="${champion.passive.name}">Passive Name</div>
+            </div>
+            <p class="spell-description" th:text="${champion.passive.description}">Passive description</p>
+        </div>
+
+        <!-- Spells -->
+        <h2 class="section-title">Abilities</h2>
+        <div class="spells-grid">
+            <div th:each="spell : ${champion.spells}" class="spell-card">
+                <div class="spell-header">
+                    <img class="spell-icon"
+                        th:src="@{'https://ddragon.leagueoflegends.com/cdn/' + ${version} + '/img/spell/' + ${spell.image.full}}"
+                        th:alt="${spell.name}">
+                    <div class="spell-name" th:text="${spell.name}">Spell Name</div>
+                </div>
+                <p class="spell-description" th:text="${spell.description}">Spell description</p>
+            </div>
+        </div>
+
+        <!-- Skins -->
+        <h2 class="section-title">Skins</h2>
+        <div class="skins-grid">
+            <div th:each="skin : ${champion.skins}" class="skin-card">
+                <img th:src="@{'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + ${champion.id} + '_' + ${skin.num} + '.jpg'}"
+                    th:alt="${skin.name}" style="width: 100%; border-radius: 4px;">
+                <p class="skin-name" th:text="${skin.name}">Skin Name</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

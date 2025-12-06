@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>League of Legends Champions</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>League of Legends Champions</h1>
+            <p>Data Dragon API v<span th:text="${version}"></span></p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="champion-grid">
+            <div th:each="champion : ${champions}" class="champion-card">
+                <a th:href="@{/champions/{id}(id=${champion.id})}" style="text-decoration: none; color: inherit;">
+                    <div class="image-wrapper">
+                        <img th:src="@{'https://ddragon.leagueoflegends.com/cdn/' + ${version} + '/img/champion/' + ${champion.image.full}}"
+                            th:alt="${champion.name}">
+                    </div>
+                    <div class="champion-info">
+                        <h2 th:text="${champion.name}">Name</h2>
+                        <p class="title" th:text="${champion.title}">Title</p>
+                        <div class="tags">
+                            <span th:each="tag : ${champion.tags}" th:text="${tag}" class="tag">Tag</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

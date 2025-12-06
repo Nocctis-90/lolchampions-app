@@ -1,0 +1,115 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #010a13;
+    color: #c8aa6e;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0;
+    background: linear-gradient(to bottom, #091428, #010a13);
+    border-bottom: 2px solid #c8aa6e;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #f0e6d2;
+    text-shadow: 0 0 10px rgba(200, 170, 110, 0.5);
+}
+
+header p {
+    color: #a09b8c;
+    margin-top: 10px;
+}
+
+.champion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.champion-card {
+    background-color: #0a1428;
+    border: 1px solid #1e282d;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.champion-card:hover {
+    transform: translateY(-5px);
+    border-color: #c8aa6e;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.image-wrapper {
+    position: relative;
+    padding-top: 100%; /* 1:1 Aspect Ratio if using square images */
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.champion-card:hover .image-wrapper img {
+    transform: scale(1.1);
+}
+
+.champion-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.champion-info h2 {
+    margin: 0 0 5px 0;
+    color: #f0e6d2;
+    font-size: 1.2rem;
+}
+
+.champion-info .title {
+    color: #a09b8c;
+    font-size: 0.9rem;
+    margin: 0 0 15px 0;
+    font-style: italic;
+    text-transform: capitalize;
+}
+
+.tags {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 0.75rem;
+    background-color: #1e2328;
+    color: #cdbe91;
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 1px solid #c8aa6e;
+    text-transform: uppercase;
+}
