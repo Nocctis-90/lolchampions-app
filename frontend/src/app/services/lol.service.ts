@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Champion, ChampionDetail, Item } from '../models/lol.model';
+import { Champion, ChampionDetail, Item, Match, PlayerInfo } from '../models/lol.model';
 
 @Injectable({
     providedIn: 'root'
@@ -21,5 +21,13 @@ export class LolService {
 
     getItems(): Observable<Item[]> {
         return this.http.get<Item[]>(`${this.apiUrl}/items`);
+    }
+
+    getMatches(gameName: string, tag: string): Observable<Match[]> {
+        return this.http.get<Match[]>(`${this.apiUrl}/matches/${gameName}/${tag}`);
+    }
+
+    getPlayerInfo(gameName: string, tag: string): Observable<PlayerInfo> {
+        return this.http.get<PlayerInfo>(`${this.apiUrl}/matches/player/${gameName}/${tag}`);
     }
 }

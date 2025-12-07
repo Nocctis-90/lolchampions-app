@@ -60,3 +60,21 @@ export interface ChampionDetail extends Champion {
     spells: Spell[];
     skins: Skin[];
 }
+
+export interface Match {
+    matchId: string;
+    championName: string;
+    win: boolean;
+    gameMode: string;
+    kda: string;
+    gameDate: string;
+}
+
+export interface PlayerInfo {
+    gameName: string;
+    tagLine: string;
+    puuid: string;
+    profileIconId: number;
+    summonerLevel: number;
+    profileIconUrl: string;
+}

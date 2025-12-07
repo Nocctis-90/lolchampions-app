@@ -1,0 +1,40 @@
+<div class="search-container">
+    <h1>Match History</h1>
+    <div class="search-box">
+        <input type="text" [(ngModel)]="gameName" placeholder="Game Name" />
+        <span class="separator">#</span>
+        <input type="text" [(ngModel)]="tagLine" placeholder="Tag" />
+        <button (click)="searchMatches()" [disabled]="loading">
+            {{ loading ? 'Searching...' : 'Search' }}
+        </button>
+    </div>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+    <!-- Player Info Card -->
+    <div class="player-card" *ngIf="playerInfo">
+        <img [src]="playerInfo.profileIconUrl" alt="Profile Icon" class="profile-icon" />
+        <div class="player-details">
+            <h2>{{ playerInfo.gameName }}<span class="tag">#{{ playerInfo.tagLine }}</span></h2>
+            <p class="level">Level {{ playerInfo.summonerLevel }}</p>
+        </div>
+    </div>
+
+    <div class="match-list" *ngIf="matches.length > 0">
+        <h3>Recent Matches</h3>
+        <div *ngFor="let match of matches" class="match-item" [ngClass]="{'win': match.win, 'loss': !match.win}">
+            <div class="match-info">
+                <h3>{{ match.championName }}</h3>
+                <p>{{ match.gameMode }}</p>
+            </div>
+            <div class="match-stats">
+                <span class="kda">{{ match.kda }}</span>
+                <span class="result">{{ match.win ? 'Victory' : 'Defeat' }}</span>
+                <span class="date">{{ match.gameDate }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!loading && matches.length === 0 && playerInfo" class="no-matches">
+        <p>No recent matches found.</p>
+    </div>
+</div>

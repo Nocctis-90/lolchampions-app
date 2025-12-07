@@ -5,11 +5,13 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { ChampionListComponent } from './components/champion-list/champion-list.component';
 import { ChampionDetailComponent } from './components/champion-detail/champion-detail.component';
 
+import { HomeComponent } from './components/home/home.component';
+
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'items', component: ItemListComponent },
   { path: 'champions', component: ChampionListComponent },
   { path: 'champions/:id', component: ChampionDetailComponent },
-  { path: '', redirectTo: '/items', pathMatch: 'full' }
 ];
 
 @NgModule({
