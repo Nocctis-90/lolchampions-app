@@ -1,31 +1,58 @@
 # League of Legends Project
 
-This is a Spring Boot application that acts as a Wiki/Database for League of Legends, fetching data from the Data Dragon API.
+This project is a modern web application that acts as a Wiki/Explorer for League of Legends, fetching real-time data from the Data Dragon API.
+
+It has been migrated to a split **Client-Server Architecture**:
+- **Backend**: Spring Boot (Java) REST API.
+- **Frontend**: Angular Single Page Application (SPA).
 
 ## Features
 
-- **Champions**: List all champions with their splash art and tags.
-- **Champion Details**: View detailed information for each champion including Lore, Passive Skills, Spells (Q, W, E, R), and Skins.
-- **Items**: Browse in-game items with prices, stats, and descriptions (with tooltips).
-- **Navigation**: Central menu to access different sections.
+- **Champions**: Browse all champions with high-quality splash art.
+- **Champion Details**: deeply detail views including Lore, Passives, Spells, and Skins.
+- **Items**: Complete item database with prices, tooltips, and stats.
+- **Modern UI**: Dark-themed, responsive design tailored for gamers.
+
+## Tech Stack
+
+- **Backend**: Java 17, Spring Boot 3.2, Maven.
+- **Frontend**: Angular 12+, TypeScript, CSS3.
 
 ## Project Structure
 
-This project follows the standard Maven directory layout:
-
-- `src/main/java`: Source code
-  - `com.example.lol.controller`: Web Controllers
-  - `com.example.lol.model`: Data Models (Champion, Item, etc.)
-  - `com.example.lol.service`: Business Logic (API Fetching)
-- `src/main/resources`: Configuration and Static Assets
-  - `templates`: Thymeleaf HTML templates (UI)
-  - `static/css`: CSS Styles
+- **Backend** (`/src`):
+  - `com.example.lol.controller`: REST Controllers (API endpoints).
+  - `com.example.lol.service`: Logic to fetch data from Riot's Data Dragon.
+- **Frontend** (`/frontend`):
+  - Angular application source code.
+  - Components for Champions, Items, and Details.
 
 ## How to Run
 
-1.  Ensure you have Java 17+ and Maven installed.
-2.  Run the following command:
-    ```bash
-    mvn spring-boot:run
-    ```
-3.  Access the application at `http://localhost:8083` (or port defined in application.properties).
+### Prerequisites
+- Java 17+
+- Maven
+- Node.js (v14+) & npm
+- Angular CLI (`npm install -g @angular/cli`)
+
+### 1. Start the Backend (API)
+The backend runs on port `8084` and serves the data.
+
+```bash
+# In the root directory
+mvn spring-boot:run
+```
+
+### 2. Start the Frontend (UI)
+The frontend runs on port `4200`.
+
+```bash
+# Open a new terminal
+cd frontend
+npm install # Only mainly for the first time
+ng serve
+```
+
+### 3. Access the App
+Open your browser and navigate to:
+**[http://localhost:4200](http://localhost:4200)**
