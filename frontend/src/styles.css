@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #010a13;
+    color: #c8aa6e;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0;
+    background: linear-gradient(to bottom, #091428, #010a13);
+    border-bottom: 2px solid #c8aa6e;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #f0e6d2;
+    text-shadow: 0 0 10px rgba(200, 170, 110, 0.5);
+}
+
+header p {
+    color: #a09b8c;
+    margin-top: 10px;
+}
+
+/* Common utility classes */
+.hidden {
+    display: none !important;
+}
+
+nav { margin-top: 20px; }
+nav a { color: #c8aa6e; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 1.2rem; }
+nav a:hover, nav a.active { color: #f0e6d2; text-shadow: 0 0 5px rgba(240, 230, 210, 0.5); }

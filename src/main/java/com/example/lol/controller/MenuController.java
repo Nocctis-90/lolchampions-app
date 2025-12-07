@@ -1,11 +1,15 @@
 package com.example.lol.controller;
 
+import com.example.lol.model.Item;
 import com.example.lol.service.LolService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/items")
 public class MenuController {
 
     private final LolService lolService;
@@ -14,16 +18,8 @@ public class MenuController {
         this.lolService = lolService;
     }
 
-    @GetMapping("/")
-    public String getMenu(Model model) {
-        model.addAttribute("version", lolService.getVersion());
-        return "menu";
-    }
-
-    @GetMapping("/items")
-    public String getItems(Model model) {
-        model.addAttribute("items", lolService.getItems());
-        model.addAttribute("version", lolService.getVersion());
-        return "items";
+    @GetMapping
+    public List<Item> getItems() {
+        return lolService.getItems();
     }
 }

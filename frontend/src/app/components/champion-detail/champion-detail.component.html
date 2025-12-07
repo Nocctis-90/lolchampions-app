@@ -1,0 +1,54 @@
+<div class="detail-container" *ngIf="champion">
+    <a routerLink="/champions" class="back-link">← Back to Champions</a>
+
+    <div class="champion-header">
+        <div class="champion-splash">
+            <img [src]="'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/' + champion.id + '_0.jpg'"
+                [alt]="champion.name">
+        </div>
+        <div class="champion-main-info">
+            <h1>{{champion.name}}</h1>
+            <p class="subtitle">{{champion.title}}</p>
+            <div class="tags">
+                <span *ngFor="let tag of champion.tags" class="tag">{{tag}}</span>
+            </div>
+            <div class="lore">{{champion.lore}}</div>
+        </div>
+    </div>
+
+    <!-- Passive -->
+    <h2 class="section-title">Passive Ability</h2>
+    <div class="passive-section" *ngIf="champion.passive">
+        <div class="passive-header">
+            <img class="passive-icon"
+                [src]="'https://ddragon.leagueoflegends.com/cdn/' + version + '/img/passive/' + champion.passive.image.full"
+                [alt]="champion.passive.name">
+            <div class="passive-name">{{champion.passive.name}}</div>
+        </div>
+        <div class="spell-description" [innerHTML]="champion.passive.description"></div>
+    </div>
+
+    <!-- Spells -->
+    <h2 class="section-title">Abilities</h2>
+    <div class="spells-grid">
+        <div *ngFor="let spell of champion.spells" class="spell-card">
+            <div class="spell-header">
+                <img class="spell-icon"
+                    [src]="'https://ddragon.leagueoflegends.com/cdn/' + version + '/img/spell/' + spell.image.full"
+                    [alt]="spell.name">
+                <div class="spell-name">{{spell.name}}</div>
+            </div>
+            <div class="spell-description" [innerHTML]="spell.description"></div>
+        </div>
+    </div>
+
+    <!-- Skins -->
+    <h2 class="section-title">Skins</h2>
+    <div class="skins-grid">
+        <div *ngFor="let skin of champion.skins" class="skin-card">
+            <img [src]="'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + champion.id + '_' + skin.num + '.jpg'"
+                [alt]="skin.name" style="width: 100%; border-radius: 4px;">
+            <p class="skin-name">{{skin.name}}</p>
+        </div>
+    </div>
+</div>

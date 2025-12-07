@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="champion-grid">
+        <div *ngFor="let champion of champions" class="champion-card">
+            <a [routerLink]="['/champions', champion.id]" style="text-decoration: none; color: inherit;">
+                <div class="image-wrapper">
+                    <img [src]="'https://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + champion.image.full"
+                        [alt]="champion.name">
+                </div>
+                <div class="champion-info">
+                    <h2>{{champion.name}}</h2>
+                    <p class="title">{{champion.title}}</p>
+                    <div class="tags">
+                        <span *ngFor="let tag of champion.tags" class="tag">{{tag}}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

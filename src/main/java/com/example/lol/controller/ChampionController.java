@@ -1,12 +1,17 @@
 package com.example.lol.controller;
 
+import com.example.lol.model.Champion;
+import com.example.lol.model.ChampionDetail;
 import com.example.lol.service.LolService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/champions")
 public class ChampionController {
 
     private final LolService lolService;
@@ -15,17 +20,13 @@ public class ChampionController {
         this.lolService = lolService;
     }
 
-    @GetMapping("/champions")
-    public String getChampions(Model model) {
-        model.addAttribute("champions", lolService.getChampions());
-        model.addAttribute("version", lolService.getVersion());
-        return "champions";
+    @GetMapping
+    public List<Champion> getChampions() {
+        return lolService.getChampions();
     }
 
-    @GetMapping("/champions/{id}")
-    public String getChampionDetail(@PathVariable String id, Model model) {
-        model.addAttribute("champion", lolService.getChampionDetail(id));
-        model.addAttribute("version", lolService.getVersion());
-        return "detail";
+    @GetMapping("/{id}")
+    public ChampionDetail getChampionDetail(@PathVariable String id) {
+        return lolService.getChampionDetail(id);
     }
 }

@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="item-grid">
+        <ng-container *ngFor="let item of items">
+            <div class="item-card" *ngIf="item.image">
+                <img [src]="'https://ddragon.leagueoflegends.com/cdn/' + version + '/img/item/' + item.image.full"
+                    [alt]="item.name">
+
+                <div class="tooltip">
+                    <h3>{{item.name}}</h3>
+                    <span class="gold">{{item.gold.total}} Gold</span>
+                    <div class="description" [innerHTML]="item.description"></div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
