@@ -2,8 +2,10 @@
   <h1>League of Legends</h1>
   <p>Champions & Items Explorer</p>
   <nav>
-    <a routerLink="/items" routerLinkActive="active">Items</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a routerLink="/rotation" routerLinkActive="active">Free Rotation</a>
     <a routerLink="/champions" routerLinkActive="active">Champions</a>
+    <a routerLink="/items" routerLinkActive="active">Items</a>
   </nav>
 </header>
 

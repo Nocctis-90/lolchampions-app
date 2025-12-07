@@ -30,4 +30,8 @@ export class LolService {
     getPlayerInfo(gameName: string, tag: string): Observable<PlayerInfo> {
         return this.http.get<PlayerInfo>(`${this.apiUrl}/matches/player/${gameName}/${tag}`);
     }
+
+    getFreeRotation(): Observable<Champion[]> {
+        return this.http.get<Champion[]>(`${this.apiUrl}/champions/rotation`);
+    }
 }

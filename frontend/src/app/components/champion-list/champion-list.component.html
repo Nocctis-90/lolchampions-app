@@ -1,19 +1,39 @@
 <div class="container">
-    <div class="champion-grid">
-        <div *ngFor="let champion of champions" class="champion-card">
-            <a [routerLink]="['/champions', champion.id]" style="text-decoration: none; color: inherit;">
+    <div class="header">
+        <h1>🏆 Champions</h1>
+        <div class="search-box">
+            <input type="text" [(ngModel)]="searchQuery" (input)="filterChampions()"
+                placeholder="Search champions..." />
+        </div>
+        <p class="count" *ngIf="!loading">{{ filteredChampions.length }} champions</p>
+    </div>
+
+    <div class="loading" *ngIf="loading">
+        <p>Loading champions...</p>
+    </div>
+
+    <div class="champion-grid" *ngIf="!loading">
+        <div *ngFor="let champion of filteredChampions" class="champion-card">
+            <a [routerLink]="['/champions', champion.id]">
                 <div class="image-wrapper">
-                    <img [src]="'https://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + champion.image.full"
-                        [alt]="champion.name">
+                    <img *ngIf="hasValidImage(champion)" [src]="getChampionImageUrl(champion)" [alt]="champion.name"
+                        (error)="onImageError($event)" loading="lazy">
+                    <div *ngIf="!hasValidImage(champion)" class="image-placeholder">
+                        <span>{{ champion.name.charAt(0) }}</span>
+                    </div>
                 </div>
                 <div class="champion-info">
-                    <h2>{{champion.name}}</h2>
-                    <p class="title">{{champion.title}}</p>
+                    <h2>{{ champion.name }}</h2>
+                    <p class="title">{{ champion.title }}</p>
                     <div class="tags">
-                        <span *ngFor="let tag of champion.tags" class="tag">{{tag}}</span>
+                        <span *ngFor="let tag of champion.tags" class="tag">{{ tag }}</span>
                     </div>
                 </div>
             </a>
         </div>
+    </div>
+
+    <div class="no-results" *ngIf="!loading && filteredChampions.length === 0 && searchQuery">
+        <p>No champions found for "{{ searchQuery }}"</p>
     </div>
 </div>

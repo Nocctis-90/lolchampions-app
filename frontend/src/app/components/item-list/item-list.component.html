@@ -1,16 +1,62 @@
 <div class="container">
-    <div class="item-grid">
-        <ng-container *ngFor="let item of items">
-            <div class="item-card" *ngIf="item.image">
-                <img [src]="'https://ddragon.leagueoflegends.com/cdn/' + version + '/img/item/' + item.image.full"
-                    [alt]="item.name">
+    <div class="header">
+        <h1>⚔️ Itens do Jogo</h1>
+        <p class="subtitle">Explore todos os itens disponíveis no League of Legends</p>
 
-                <div class="tooltip">
-                    <h3>{{item.name}}</h3>
-                    <span class="gold">{{item.gold.total}} Gold</span>
-                    <div class="description" [innerHTML]="item.description"></div>
+        <div class="search-box">
+            <input type="text" [(ngModel)]="searchQuery" (input)="filterItems()" placeholder="Buscar itens..." />
+        </div>
+
+        <div class="categories">
+            <button *ngFor="let cat of categories" [class.active]="selectedCategory === cat.key"
+                (click)="selectCategory(cat.key)">
+                {{ cat.label }}
+            </button>
+        </div>
+
+        <p class="count" *ngIf="!loading">
+            {{ filteredItems.length }} itens encontrados
+        </p>
+    </div>
+
+    <div class="loading" *ngIf="loading">
+        <div class="spinner"></div>
+        <p>Carregando itens...</p>
+    </div>
+
+    <div class="item-grid" *ngIf="!loading">
+        <div class="item-card" *ngFor="let item of filteredItems; trackBy: trackByName">
+            <div class="item-header">
+                <div class="item-icon" *ngIf="hasValidImage(item)">
+                    <img [src]="getItemImageUrl(item)" [alt]="item.name" (error)="onImageError($event)" loading="lazy">
+                </div>
+                <div class="item-icon placeholder" *ngIf="!hasValidImage(item)">
+                    <span>?</span>
+                </div>
+                <div class="item-title">
+                    <h3>{{ item.name }}</h3>
+                    <span class="gold">💰 {{ formatGold(item.gold.total) }}</span>
                 </div>
             </div>
-        </ng-container>
+
+            <div class="item-stats" *ngIf="extractStats(item.description).length > 0">
+                <span class="stat" *ngFor="let stat of extractStats(item.description)">
+                    {{ stat }}
+                </span>
+            </div>
+
+            <div class="item-description">
+                {{ getCleanDescription(item.description) }}
+            </div>
+
+            <div class="item-tags" *ngIf="item.tags && item.tags.length > 0">
+                <span class="tag" *ngFor="let tag of item.tags.slice(0, 3)">{{ tag }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="no-results" *ngIf="!loading && filteredItems.length === 0">
+        <p *ngIf="searchQuery">Nenhum item encontrado para "{{ searchQuery }}"</p>
+        <p *ngIf="!searchQuery && selectedCategory !== 'all'">Nenhum item nesta categoria</p>
     </div>
 </div>

@@ -1,3 +1,54 @@
+.container {
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    color: #c9aa71;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.search-box {
+    max-width: 400px;
+    margin: 0 auto 1rem;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: #1a1a2e;
+    color: #fff;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #c9aa71;
+}
+
+.search-box input::placeholder {
+    color: #888;
+}
+
+.count {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: #888;
+}
+
 .champion-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -8,15 +59,22 @@
 .champion-card {
     background-color: #0a1428;
     border: 1px solid #1e282d;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     position: relative;
     height: 100%;
-    /* Ensure equal height */
     display: flex;
     flex-direction: column;
+}
+
+.champion-card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .champion-card:hover {
@@ -30,7 +88,7 @@
     position: relative;
     padding-top: 100%;
     overflow: hidden;
-    background-color: #000;
+    background-color: #0a0a0a;
 }
 
 .image-wrapper img {
@@ -47,11 +105,25 @@
     transform: scale(1.1);
 }
 
+.image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    font-size: 3rem;
+    color: #c9aa71;
+    font-weight: bold;
+}
+
 .champion-info {
     padding: 15px;
     text-align: center;
     flex-grow: 1;
-    /* Pushes content to fill space if needed */
 }
 
 .champion-info h2 {
@@ -77,10 +149,16 @@
 
 .tag {
     font-size: 0.75rem;
-    background-color: #1e2328;
+    background-color: rgba(201, 170, 113, 0.15);
     color: #cdbe91;
     padding: 2px 8px;
-    border-radius: 2px;
-    border: 1px solid #c8aa6e;
+    border-radius: 4px;
+    border: 1px solid rgba(200, 170, 110, 0.3);
     text-transform: uppercase;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #888;
 }

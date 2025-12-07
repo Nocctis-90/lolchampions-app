@@ -6,12 +6,14 @@ import { ChampionListComponent } from './components/champion-list/champion-list.
 import { ChampionDetailComponent } from './components/champion-detail/champion-detail.component';
 
 import { HomeComponent } from './components/home/home.component';
+import { RotationComponent } from './components/rotation/rotation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'items', component: ItemListComponent },
   { path: 'champions', component: ChampionListComponent },
   { path: 'champions/:id', component: ChampionDetailComponent },
+  { path: 'rotation', component: RotationComponent },
 ];
 
 @NgModule({

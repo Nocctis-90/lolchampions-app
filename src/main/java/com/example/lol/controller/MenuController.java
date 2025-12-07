@@ -1,25 +1,30 @@
 package com.example.lol.controller;
 
 import com.example.lol.model.Item;
-import com.example.lol.service.LolService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.lol.service.ItemService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST Controller for Item and Menu-related endpoints.
+ */
 @RestController
-@RequestMapping("/api/items")
+@RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class MenuController {
 
-    private final LolService lolService;
+    private final ItemService itemService;
 
-    public MenuController(LolService lolService) {
-        this.lolService = lolService;
+    public MenuController(ItemService itemService) {
+        this.itemService = itemService;
     }
 
-    @GetMapping
+    /**
+     * Get all game items.
+     */
+    @GetMapping("/items")
     public List<Item> getItems() {
-        return lolService.getItems();
+        return itemService.getAllItems();
     }
 }

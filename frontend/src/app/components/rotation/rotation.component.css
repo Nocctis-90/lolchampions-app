@@ -1,0 +1,131 @@
+.rotation-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    color: #c9aa71;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: #888;
+    font-size: 1.1rem;
+}
+
+.header .count {
+    color: #c9aa71;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: #888;
+}
+
+.champions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.champion-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+}
+
+.champion-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(201, 170, 113, 0.3);
+    border-color: #c9aa71;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    background-color: #0a0a0a;
+}
+
+.champion-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.3s;
+}
+
+.champion-card:hover .champion-image {
+    transform: scale(1.1);
+}
+
+.image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    font-size: 3rem;
+    color: #c9aa71;
+    font-weight: bold;
+}
+
+.champion-info {
+    padding: 1rem;
+}
+
+.champion-info h3 {
+    color: #fff;
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+}
+
+.champion-info .title {
+    color: #888;
+    margin: 0 0 0.75rem 0;
+    font-size: 0.85rem;
+    font-style: italic;
+    text-transform: capitalize;
+}
+
+.tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: rgba(201, 170, 113, 0.2);
+    color: #c9aa71;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.no-data {
+    text-align: center;
+    padding: 3rem;
+    color: #888;
+}
