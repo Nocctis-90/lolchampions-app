@@ -21,15 +21,90 @@
 
     <div class="match-list" *ngIf="matches.length > 0">
         <h3>Recent Matches</h3>
-        <div *ngFor="let match of matches" class="match-item" [ngClass]="{'win': match.win, 'loss': !match.win}">
-            <div class="match-info">
-                <h3>{{ match.championName }}</h3>
-                <p>{{ match.gameMode }}</p>
+        <div *ngFor="let match of matches" class="match-card"
+            [ngClass]="{'win': match.win && !match.remake, 'loss': !match.win && !match.remake, 'remake': match.remake, 'expanded': isExpanded(match.matchId)}">
+            <!-- Match Header (Always Visible) -->
+            <div class="match-header" (click)="toggleMatch(match.matchId)">
+                <div class="player-champion">
+                    <img [src]="match.championImageUrl" [alt]="match.championName" class="champion-icon-large" />
+                    <div class="champion-info">
+                        <h3>{{ match.championName }}</h3>
+                        <p class="game-mode">{{ match.queueType }}</p>
+                    </div>
+                </div>
+                <div class="match-result">
+                    <span class="result-badge"
+                        [ngClass]="{'victory': match.win && !match.remake, 'defeat': !match.win && !match.remake, 'remake': match.remake}">
+                        {{ match.remake ? 'Remake' : (match.win ? 'Victory' : 'Defeat') }}
+                    </span>
+                    <span class="kda">{{ match.kda }}</span>
+                    <span class="duration">{{ match.gameDurationMinutes }}:{{
+                        match.gameDurationSeconds.toString().padStart(2, '0') }}</span>
+                    <span class="date">{{ match.gameDate }}</span>
+                </div>
+                <div class="expand-icon">
+                    <span *ngIf="!isExpanded(match.matchId)">▼</span>
+                    <span *ngIf="isExpanded(match.matchId)">▲</span>
+                </div>
             </div>
-            <div class="match-stats">
-                <span class="kda">{{ match.kda }}</span>
-                <span class="result">{{ match.win ? 'Victory' : 'Defeat' }}</span>
-                <span class="date">{{ match.gameDate }}</span>
+
+            <!-- Teams Section (Collapsible) -->
+            <div class="teams-container" *ngIf="isExpanded(match.matchId)">
+                <!-- Team 1 (Blue) -->
+                <div class="team blue-team">
+                    <div class="team-header">
+                        <span class="team-label">Blue Team</span>
+                        <span class="team-result" *ngIf="match.team1.length > 0">
+                            {{ match.team1[0].win ? 'Victory' : 'Defeat' }}
+                        </span>
+                    </div>
+                    <div class="participants">
+                        <div *ngFor="let p of match.team1" class="participant"
+                            [ngClass]="{'current-player': p.currentPlayer}">
+                            <img [src]="p.championImageUrl" [alt]="p.championName" class="champion-icon-small" />
+                            <span class="summoner-name clickable" [title]="p.summonerName + '#' + p.tagline"
+                                (click)="loadPlayerProfile(p.summonerName, p.tagline, $event)">
+                                {{ p.summonerName }}
+                            </span>
+                            <span class="participant-kda">{{ p.kda }}</span>
+                            <span class="participant-farm">{{ p.farm }} CS</span>
+                            <div class="items">
+                                <div *ngFor="let itemUrl of p.itemImageUrls; let i = index" class="item-slot"
+                                    [class.trinket]="i === 6">
+                                    <img *ngIf="itemUrl" [src]="itemUrl" class="item-icon" alt="Item" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team 2 (Red) -->
+                <div class="team red-team">
+                    <div class="team-header">
+                        <span class="team-label">Red Team</span>
+                        <span class="team-result" *ngIf="match.team2.length > 0">
+                            {{ match.team2[0].win ? 'Victory' : 'Defeat' }}
+                        </span>
+                    </div>
+                    <div class="participants">
+                        <div *ngFor="let p of match.team2" class="participant"
+                            [ngClass]="{'current-player': p.currentPlayer}">
+                            <img [src]="p.championImageUrl" [alt]="p.championName" class="champion-icon-small" />
+                            <span class="summoner-name clickable" [title]="p.summonerName + '#' + p.tagline"
+                                (click)="loadPlayerProfile(p.summonerName, p.tagline, $event)">
+                                {{ p.summonerName }}
+                            </span>
+                            <span class="participant-kda">{{ p.kda }}</span>
+                            <span class="participant-farm">{{ p.farm }} CS</span>
+                            <div class="items">
+                                <div *ngFor="let itemUrl of p.itemImageUrls; let i = index" class="item-slot"
+                                    [class.trinket]="i === 6">
+                                    <img *ngIf="itemUrl" [src]="itemUrl" class="item-icon" alt="Item" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

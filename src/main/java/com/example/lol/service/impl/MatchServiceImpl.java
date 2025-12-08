@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of MatchService.
@@ -20,6 +24,7 @@ public class MatchServiceImpl implements MatchService {
     private final RiotApiHelper riotApiHelper;
     private final MatchHelper matchHelper;
     private final PlayerService playerService;
+    private final ExecutorService executorService;
 
     public MatchServiceImpl(RiotApiHelper riotApiHelper,
             MatchHelper matchHelper,
@@ -27,6 +32,7 @@ public class MatchServiceImpl implements MatchService {
         this.riotApiHelper = riotApiHelper;
         this.matchHelper = matchHelper;
         this.playerService = playerService;
+        this.executorService = Executors.newFixedThreadPool(10);
     }
 
     @Override
@@ -48,14 +54,21 @@ public class MatchServiceImpl implements MatchService {
                 return new ArrayList<>();
             }
 
-            // Step 3: Get details for each match
-            List<Match> matches = new ArrayList<>();
+            // Step 3: Get details for each match IN PARALLEL
+            List<CompletableFuture<Match>> futureMatches = new ArrayList<>();
+
             for (String matchId : matchIds) {
-                Match match = getMatchDetails(matchId, puuid);
-                if (match != null) {
-                    matches.add(match);
-                }
+                CompletableFuture<Match> future = CompletableFuture.supplyAsync(
+                        () -> getMatchDetails(matchId, puuid),
+                        executorService);
+                futureMatches.add(future);
             }
+
+            // Wait for all futures to complete and collect results
+            List<Match> matches = futureMatches.stream()
+                    .map(CompletableFuture::join)
+                    .filter(match -> match != null)
+                    .collect(Collectors.toList());
 
             return matches;
         } catch (Exception e) {

@@ -8,6 +8,7 @@ public class MatchInfo {
     private long gameCreation;
     private long gameDuration;
     private String gameMode;
+    private int queueId;
     private List<MatchParticipant> participants;
 
     public long getGameCreation() {
@@ -32,6 +33,14 @@ public class MatchInfo {
 
     public void setGameMode(String gameMode) {
         this.gameMode = gameMode;
+    }
+
+    public int getQueueId() {
+        return queueId;
+    }
+
+    public void setQueueId(int queueId) {
+        this.queueId = queueId;
     }
 
     public List<MatchParticipant> getParticipants() {

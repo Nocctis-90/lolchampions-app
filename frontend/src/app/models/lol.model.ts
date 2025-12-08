@@ -61,13 +61,32 @@ export interface ChampionDetail extends Champion {
     skins: Skin[];
 }
 
+export interface MatchParticipantSummary {
+    summonerName: string;
+    tagline: string;
+    championName: string;
+    championImageUrl: string;
+    kda: string;
+    win: boolean;
+    currentPlayer: boolean;
+    itemImageUrls: string[];
+    farm: number;
+}
+
 export interface Match {
     matchId: string;
     championName: string;
+    championImageUrl: string;
     win: boolean;
+    remake: boolean;
     gameMode: string;
+    queueType: string;
     kda: string;
     gameDate: string;
+    gameDurationMinutes: number;
+    gameDurationSeconds: number;
+    team1: MatchParticipantSummary[];
+    team2: MatchParticipantSummary[];
 }
 
 export interface PlayerInfo {
@@ -78,3 +97,4 @@ export interface PlayerInfo {
     summonerLevel: number;
     profileIconUrl: string;
 }
+

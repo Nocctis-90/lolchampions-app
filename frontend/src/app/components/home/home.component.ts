@@ -14,6 +14,7 @@ export class HomeComponent {
   playerInfo: PlayerInfo | null = null;
   errorMessage: string = '';
   loading: boolean = false;
+  expandedMatches: Set<string> = new Set();
 
   constructor(private lolService: LolService) { }
 
@@ -23,6 +24,7 @@ export class HomeComponent {
       this.errorMessage = '';
       this.playerInfo = null;
       this.matches = [];
+      this.expandedMatches.clear();
 
       // First get player info
       this.lolService.getPlayerInfo(this.gameName, this.tagLine).subscribe({
@@ -49,5 +51,27 @@ export class HomeComponent {
     } else {
       this.errorMessage = 'Please enter both Game Name and Tag Line.';
     }
+  }
+
+  toggleMatch(matchId: string) {
+    if (this.expandedMatches.has(matchId)) {
+      this.expandedMatches.delete(matchId);
+    } else {
+      this.expandedMatches.add(matchId);
+    }
+  }
+
+  isExpanded(matchId: string): boolean {
+    return this.expandedMatches.has(matchId);
+  }
+
+  loadPlayerProfile(gameName: string, tagLine: string, event: Event) {
+    // Prevenir propagação para não expandir/colapsar o match
+    event.stopPropagation();
+
+    // Atualizar campos e fazer nova busca
+    this.gameName = gameName;
+    this.tagLine = tagLine;
+    this.searchMatches();
   }
 }

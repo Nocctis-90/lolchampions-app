@@ -31,7 +31,10 @@ class MatchControllerTest {
 
     @Test
     void getMatches_shouldReturnListOfMatches() throws Exception {
-        Match match = new Match("BR1_123456", "Ahri", true, "CLASSIC", "10/2/5", "2024-01-15");
+        Match match = new Match("BR1_123456", "Ahri",
+                "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png",
+                true, false, "CLASSIC", "Ranked Solo/Duo", "10/2/5", "2024-01-15", 25, 30,
+                Collections.emptyList(), Collections.emptyList());
 
         when(matchService.getMatches("TestPlayer", "BR1")).thenReturn(Arrays.asList(match));
 
