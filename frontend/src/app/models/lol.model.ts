@@ -93,8 +93,63 @@ export interface PlayerInfo {
     gameName: string;
     tagLine: string;
     puuid: string;
+    summonerId?: string;  // Added to fetch ranked data
     profileIconId: number;
     summonerLevel: number;
     profileIconUrl: string;
 }
 
+export interface RankedInfo {
+    queueType: string;    // RANKED_SOLO_5x5, RANKED_FLEX_SR
+    tier: string;         // IRON, BRONZE, SILVER, GOLD, etc.
+    rank: string;         // I, II, III, IV
+    leaguePoints: number;
+    wins: number;
+    losses: number;
+    hotStreak: boolean;
+    veteran: boolean;
+    freshBlood: boolean;
+    inactive: boolean;
+}
+
+export interface SeasonRank {
+    season: number;
+    tier: string;
+    division: string;
+    queueType: string;
+}
+
+export interface ChampionSeasonStats {
+    championId: string;
+    championName: string;
+    championImageUrl: string;
+    gamesPlayed: number;
+    wins: number;
+    losses: number;
+    winRate: number;
+    avgKills: number;
+    avgDeaths: number;
+    avgAssists: number;
+    avgCs: number;
+    doubleKills: number;
+    tripleKills: number;
+    quadraKills: number;
+    pentaKills: number;
+}
+
+export interface SeasonStats {
+    season: number;
+    tier: string;
+    division: string;
+    puuid: string;
+    totalGames: number;
+    totalWins: number;
+    totalLosses: number;
+    overallWinRate: number;
+    totalDoubleKills: number;
+    totalTripleKills: number;
+    totalQuadraKills: number;
+    totalPentaKills: number;
+    avgCs: number;
+    championStats: ChampionSeasonStats[];
+}

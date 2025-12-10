@@ -4,6 +4,7 @@ public class PlayerInfo {
     private String gameName;
     private String tagLine;
     private String puuid;
+    private String summonerId; // Added to fetch ranked data
     private int profileIconId;
     private long summonerLevel;
     private String profileIconUrl;
@@ -11,11 +12,13 @@ public class PlayerInfo {
     public PlayerInfo() {
     }
 
-    public PlayerInfo(String gameName, String tagLine, String puuid, int profileIconId, long summonerLevel,
+    public PlayerInfo(String gameName, String tagLine, String puuid, String summonerId, int profileIconId,
+            long summonerLevel,
             String profileIconUrl) {
         this.gameName = gameName;
         this.tagLine = tagLine;
         this.puuid = puuid;
+        this.summonerId = summonerId;
         this.profileIconId = profileIconId;
         this.summonerLevel = summonerLevel;
         this.profileIconUrl = profileIconUrl;
@@ -43,6 +46,14 @@ public class PlayerInfo {
 
     public void setPuuid(String puuid) {
         this.puuid = puuid;
+    }
+
+    public String getSummonerId() {
+        return summonerId;
+    }
+
+    public void setSummonerId(String summonerId) {
+        this.summonerId = summonerId;
     }
 
     public int getProfileIconId() {

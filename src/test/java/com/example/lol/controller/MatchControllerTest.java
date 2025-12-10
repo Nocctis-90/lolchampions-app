@@ -20,68 +20,69 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MatchController.class)
 class MatchControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @MockBean
-    private MatchService matchService;
+        @MockBean
+        private MatchService matchService;
 
-    @MockBean
-    private PlayerService playerService;
+        @MockBean
+        private PlayerService playerService;
 
-    @Test
-    void getMatches_shouldReturnListOfMatches() throws Exception {
-        Match match = new Match("BR1_123456", "Ahri",
-                "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png",
-                true, false, "CLASSIC", "Ranked Solo/Duo", "10/2/5", "2024-01-15", 25, 30,
-                Collections.emptyList(), Collections.emptyList());
+        @Test
+        void getMatches_shouldReturnListOfMatches() throws Exception {
+                Match match = new Match("BR1_123456", "Ahri",
+                                "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png",
+                                true, false, "CLASSIC", "Ranked Solo/Duo", "10/2/5", "2024-01-15", 25, 30,
+                                Collections.emptyList(), Collections.emptyList());
 
-        when(matchService.getMatches("TestPlayer", "BR1")).thenReturn(Arrays.asList(match));
+                when(matchService.getMatches("TestPlayer", "BR1")).thenReturn(Arrays.asList(match));
 
-        mockMvc.perform(get("/api/matches/TestPlayer/BR1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].matchId").value("BR1_123456"))
-                .andExpect(jsonPath("$[0].championName").value("Ahri"))
-                .andExpect(jsonPath("$[0].win").value(true))
-                .andExpect(jsonPath("$[0].kda").value("10/2/5"));
-    }
+                mockMvc.perform(get("/api/matches/TestPlayer/BR1"))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$[0].matchId").value("BR1_123456"))
+                                .andExpect(jsonPath("$[0].championName").value("Ahri"))
+                                .andExpect(jsonPath("$[0].win").value(true))
+                                .andExpect(jsonPath("$[0].kda").value("10/2/5"));
+        }
 
-    @Test
-    void getMatches_shouldReturnEmptyListWhenNoMatches() throws Exception {
-        when(matchService.getMatches("NewPlayer", "BR1")).thenReturn(Collections.emptyList());
+        @Test
+        void getMatches_shouldReturnEmptyListWhenNoMatches() throws Exception {
+                when(matchService.getMatches("NewPlayer", "BR1")).thenReturn(Collections.emptyList());
 
-        mockMvc.perform(get("/api/matches/NewPlayer/BR1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$").isEmpty());
-    }
+                mockMvc.perform(get("/api/matches/NewPlayer/BR1"))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$").isArray())
+                                .andExpect(jsonPath("$").isEmpty());
+        }
 
-    @Test
-    void getPlayerInfo_shouldReturnPlayerInfo() throws Exception {
-        PlayerInfo playerInfo = new PlayerInfo(
-                "TestPlayer",
-                "BR1",
-                "test-puuid-123",
-                4567,
-                150,
-                "https://ddragon.leagueoflegends.com/cdn/15.24.1/img/profileicon/4567.png");
+        @Test
+        void getPlayerInfo_shouldReturnPlayerInfo() throws Exception {
+                PlayerInfo playerInfo = new PlayerInfo(
+                                "TestPlayer",
+                                "BR1",
+                                "test-puuid-123",
+                                "test-summoner-id", // summonerId
+                                4567,
+                                150,
+                                "https://ddragon.leagueoflegends.com/cdn/15.24.1/img/profileicon/4567.png");
 
-        when(playerService.getPlayerInfo("TestPlayer", "BR1")).thenReturn(playerInfo);
+                when(playerService.getPlayerInfo("TestPlayer", "BR1")).thenReturn(playerInfo);
 
-        mockMvc.perform(get("/api/matches/player/TestPlayer/BR1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.gameName").value("TestPlayer"))
-                .andExpect(jsonPath("$.tagLine").value("BR1"))
-                .andExpect(jsonPath("$.summonerLevel").value(150))
-                .andExpect(jsonPath("$.profileIconUrl").exists());
-    }
+                mockMvc.perform(get("/api/matches/player/TestPlayer/BR1"))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$.gameName").value("TestPlayer"))
+                                .andExpect(jsonPath("$.tagLine").value("BR1"))
+                                .andExpect(jsonPath("$.summonerLevel").value(150))
+                                .andExpect(jsonPath("$.profileIconUrl").exists());
+        }
 
-    @Test
-    void getPlayerInfo_shouldReturnNullWhenPlayerNotFound() throws Exception {
-        when(playerService.getPlayerInfo("Unknown", "XX1")).thenReturn(null);
+        @Test
+        void getPlayerInfo_shouldReturnNullWhenPlayerNotFound() throws Exception {
+                when(playerService.getPlayerInfo("Unknown", "XX1")).thenReturn(null);
 
-        mockMvc.perform(get("/api/matches/player/Unknown/XX1"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
-    }
+                mockMvc.perform(get("/api/matches/player/Unknown/XX1"))
+                                .andExpect(status().isOk())
+                                .andExpect(content().string(""));
+        }
 }

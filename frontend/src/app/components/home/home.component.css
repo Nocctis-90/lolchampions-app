@@ -60,10 +60,112 @@
     color: #ff6b6b;
     background: rgba(255, 107, 107, 0.1);
     padding: 10px;
-    border-radius: 8px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Player Card */
+.rank-lp {
+    font-size: 1.3rem;
+    color: #c9aa71;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.rank-stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.rank-stats .wins {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.rank-stats .losses {
+    color: #ef5350;
+    font-weight: bold;
+}
+
+.rank-stats .winrate {
+    color: #c9aa71;
+    font-weight: bold;
+}
+
+.total-games {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.unranked {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.unranked p {
+    color: #888;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Season History */
+.season-history {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(201, 170, 113, 0.3);
+}
+
+.season-history h4 {
+    margin: 0 0 12px 0;
+    color: #c9aa71;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.season-item {
+    background: rgba(201, 170, 113, 0.1);
+    border: 1px solid rgba(201, 170, 113, 0.3);
+    border-radius: 6px;
+    padding: 6px 8px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.season-item:hover {
+    background: rgba(201, 170, 113, 0.2);
+}
+
+.season-emblem {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.season-year {
+    color: #888;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.season-rank {
+    color: #f0d98d;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+/* Player Card (Right Side) */
 .player-card {
     display: flex;
     align-items: center;
@@ -71,7 +173,6 @@
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     padding: 20px;
     border-radius: 12px;
-    margin-bottom: 2rem;
     border: 1px solid #c9aa71;
     text-align: left;
 }
@@ -431,6 +532,18 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .player-info-container {
+        grid-template-columns: 1fr;
+    }
+
+    .ranked-section {
+        order: 2;
+    }
+
+    .player-card {
+        order: 1;
+    }
+
     .teams-container {
         grid-template-columns: 1fr;
     }
@@ -452,5 +565,214 @@
 
     .summoner-name {
         max-width: 120px;
+    }
+}
+
+/* Player Info Container with Ranked Data */
+.player-info-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    margin-bottom: 2rem;
+}
+
+/* Current Rank Card */
+.current-rank-card {
+    background: linear-gradient(135deg, #2c2416 0%, #3d3120 100%);
+    border: 2px solid #c9aa71;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(201, 170, 113, 0.2);
+    text-align: center;
+}
+
+.current-rank-card h3 {
+    margin: 0 0 20px 0;
+    color: #c9aa71;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(201, 170, 113, 0.3);
+    padding-bottom: 10px;
+}
+
+.rank-details {
+    text-align: center;
+}
+
+.rank-emblem-large {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+    animation: emblem-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes emblem-pulse {
+    from {
+        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+        transform: scale(1);
+    }
+
+    to {
+        filter: drop-shadow(0 8px 30px rgba(201, 170, 113, 0.5));
+        transform: scale(1.02);
+    }
+}
+
+.rank-tier {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f0d98d;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.unranked-emblem {
+    opacity: 0.4;
+    filter: grayscale(100%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    animation: none;
+}
+
+/* View Stats Button */
+.view-stats-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71 0%, #785a28 100%);
+    color: #0a1428;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.view-stats-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 170, 113, 0.4);
+}
+
+/* Season History Card */
+.season-history-card {
+    background: linear-gradient(135deg, #1a2a40 0%, #0d1f35 100%);
+    border: 2px solid rgba(201, 170, 113, 0.5);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.season-history-card h3 {
+    margin: 0 0 8px 0;
+    color: #f0d98d;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.season-hint {
+    margin: 0 0 15px 0;
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.season-history-card .seasons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.season-item.clickable {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background: rgba(201, 170, 113, 0.1);
+    border: 1px solid rgba(201, 170, 113, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.season-item.clickable:hover {
+    background: rgba(201, 170, 113, 0.25);
+    border-color: #c9aa71;
+    transform: translateX(5px);
+}
+
+.season-emblem-medium {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.season-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.season-history-card .season-year {
+    color: #c9aa71;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.season-rank-text {
+    color: #f0d98d;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.view-arrow {
+    color: #c9aa71;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.season-item.clickable:hover .view-arrow {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* Responsive for new cards */
+@media (max-width: 1024px) {
+    .player-info-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .player-card {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .player-info-container {
+        grid-template-columns: 1fr;
+    }
+
+    .current-rank-card {
+        order: 2;
+    }
+
+    .season-history-card {
+        order: 3;
+    }
+
+    .player-card {
+        grid-column: 1;
+        order: 1;
+    }
+
+    .rank-emblem-large {
+        width: 150px;
+        height: 150px;
     }
 }

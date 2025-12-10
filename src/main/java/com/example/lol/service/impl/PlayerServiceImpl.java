@@ -68,6 +68,7 @@ public class PlayerServiceImpl implements PlayerService {
                     account.getGameName(),
                     account.getTagLine(),
                     account.getPuuid(),
+                    null, // summonerId - not available in current Riot API
                     summoner.getProfileIconId(),
                     summoner.getSummonerLevel(),
                     profileIconUrl);

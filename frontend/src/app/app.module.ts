@@ -10,6 +10,7 @@ import { ChampionListComponent } from './components/champion-list/champion-list.
 import { ChampionDetailComponent } from './components/champion-detail/champion-detail.component';
 import { HomeComponent } from './components/home/home.component';
 import { RotationComponent } from './components/rotation/rotation.component';
+import { SeasonDetailComponent } from './components/season-detail/season-detail.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RotationComponent } from './components/rotation/rotation.component';
     ChampionListComponent,
     ChampionDetailComponent,
     HomeComponent,
-    RotationComponent
+    RotationComponent,
+    SeasonDetailComponent
   ],
   imports: [
     BrowserModule,

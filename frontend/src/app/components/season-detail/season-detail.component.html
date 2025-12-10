@@ -1,0 +1,129 @@
+<div class="season-detail-container">
+    <!-- Header with back button -->
+    <div class="header">
+        <button class="back-button" (click)="goBack()">
+            ← Back to Home
+        </button>
+        <h1>Ranked Statistics</h1>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading ranked statistics...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error">
+        <p>{{ error }}</p>
+        <button (click)="loadSeasonStats()">Try Again</button>
+    </div>
+
+    <!-- Season Stats Content -->
+    <div *ngIf="seasonStats && !loading" class="content">
+        <!-- Season Overview Card -->
+        <div class="season-overview">
+            <div class="rank-display">
+                <img [src]="getRankEmblemUrl()" alt="Rank Emblem" class="rank-emblem-large" />
+                <div class="rank-info">
+                    <h2>{{ getFullRank() }}</h2>
+                    <p class="season-label">Current Season</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">{{ seasonStats.totalGames }}</span>
+                    <span class="stat-label">Ranked Games</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value wins">{{ seasonStats.totalWins }}</span>
+                    <span class="stat-label">Wins</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value losses">{{ seasonStats.totalLosses }}</span>
+                    <span class="stat-label">Losses</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" [class]="getWinRateClass(seasonStats.overallWinRate)">
+                        {{ formatWinRate(seasonStats.overallWinRate) }}
+                    </span>
+                    <span class="stat-label">Win Rate</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">{{ formatNumber(seasonStats.avgCs) }}</span>
+                    <span class="stat-label">Avg CS</span>
+                </div>
+            </div>
+
+            <!-- Multi-Kills Section -->
+            <div class="multikills-section">
+                <h3>Multi-Kills</h3>
+                <div class="multikills-grid">
+                    <div class="multikill-item">
+                        <span class="kill-count double">{{ seasonStats.totalDoubleKills }}</span>
+                        <span class="kill-label">Double Kills</span>
+                    </div>
+                    <div class="multikill-item">
+                        <span class="kill-count triple">{{ seasonStats.totalTripleKills }}</span>
+                        <span class="kill-label">Triple Kills</span>
+                    </div>
+                    <div class="multikill-item">
+                        <span class="kill-count quadra">{{ seasonStats.totalQuadraKills }}</span>
+                        <span class="kill-label">Quadra Kills</span>
+                    </div>
+                    <div class="multikill-item">
+                        <span class="kill-count penta">{{ seasonStats.totalPentaKills }}</span>
+                        <span class="kill-label">Penta Kills</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Champion Stats Section -->
+        <div class="champions-section">
+            <h2>Champions Played (Last 50 Ranked Games)</h2>
+            <div class="champions-list">
+                <div *ngFor="let champ of seasonStats.championStats" class="champion-card">
+                    <div class="champ-header">
+                        <img [src]="champ.championImageUrl" [alt]="champ.championName" class="champ-icon" />
+                        <div class="champ-info">
+                            <h3>{{ champ.championName }}</h3>
+                            <p class="games-count">{{ champ.gamesPlayed }} games</p>
+                        </div>
+                        <div class="champ-winrate" [class]="getWinRateClass(champ.winRate)">
+                            {{ formatWinRate(champ.winRate) }}
+                        </div>
+                    </div>
+
+                    <div class="champ-stats">
+                        <div class="kda-stats">
+                            <span class="kda">
+                                {{ formatNumber(champ.avgKills) }} /
+                                <span class="deaths">{{ formatNumber(champ.avgDeaths) }}</span> /
+                                {{ formatNumber(champ.avgAssists) }}
+                            </span>
+                            <span class="cs">{{ formatNumber(champ.avgCs) }} CS</span>
+                        </div>
+
+                        <div class="record">
+                            <span class="wins">{{ champ.wins }}W</span>
+                            <span class="losses">{{ champ.losses }}L</span>
+                        </div>
+                    </div>
+
+                    <div class="champ-multikills"
+                        *ngIf="champ.doubleKills > 0 || champ.tripleKills > 0 || champ.quadraKills > 0 || champ.pentaKills > 0">
+                        <span *ngIf="champ.doubleKills > 0" class="mini-kill double">{{ champ.doubleKills }}
+                            Double</span>
+                        <span *ngIf="champ.tripleKills > 0" class="mini-kill triple">{{ champ.tripleKills }}
+                            Triple</span>
+                        <span *ngIf="champ.quadraKills > 0" class="mini-kill quadra">{{ champ.quadraKills }}
+                            Quadra</span>
+                        <span *ngIf="champ.pentaKills > 0" class="mini-kill penta">{{ champ.pentaKills }} Penta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

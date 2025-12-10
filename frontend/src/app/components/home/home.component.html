@@ -10,12 +10,39 @@
     </div>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <!-- Player Info Card -->
-    <div class="player-card" *ngIf="playerInfo">
-        <img [src]="playerInfo.profileIconUrl" alt="Profile Icon" class="profile-icon" />
-        <div class="player-details">
-            <h2>{{ playerInfo.gameName }}<span class="tag">#{{ playerInfo.tagLine }}</span></h2>
-            <p class="level">Level {{ playerInfo.summonerLevel }}</p>
+    <!-- Player Info Container with Ranked Data -->
+    <div class="player-info-container" *ngIf="playerInfo">
+        <!-- Current Rank Card -->
+        <div class="current-rank-card">
+            <h3>Ranked Solo/Duo</h3>
+            <div *ngIf="rankedInfo" class="rank-details">
+                <img [src]="getRankEmblemUrl()" alt="Rank Emblem" class="rank-emblem-large" />
+                <div class="rank-tier">{{ getFullRank() }}</div>
+                <div class="rank-lp">{{ rankedInfo.leaguePoints }} LP</div>
+                <div class="rank-stats">
+                    <span class="wins">{{ rankedInfo.wins }}W</span>
+                    <span class="losses">{{ rankedInfo.losses }}L</span>
+                    <span class="winrate">{{ getWinRate() }}</span>
+                </div>
+                <div class="total-games">{{ getTotalGames() }} games</div>
+                <a [routerLink]="['/season', playerInfo.puuid, 2025]" class="view-stats-btn">
+                    View Champion Stats →
+                </a>
+            </div>
+            <div *ngIf="!rankedInfo" class="unranked">
+                <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-iron.png"
+                    alt="Unranked" class="rank-emblem-large unranked-emblem" />
+                <p>Unranked</p>
+            </div>
+        </div>
+
+        <!-- Player Card -->
+        <div class="player-card">
+            <img [src]="playerInfo.profileIconUrl" alt="Profile Icon" class="profile-icon" />
+            <div class="player-details">
+                <h2>{{ playerInfo.gameName }}<span class="tag">#{{ playerInfo.tagLine }}</span></h2>
+                <p class="level">Level {{ playerInfo.summonerLevel }}</p>
+            </div>
         </div>
     </div>
 

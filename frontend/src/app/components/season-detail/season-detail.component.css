@@ -1,0 +1,417 @@
+.season-detail-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a1428 0%, #091428 50%, #0a1e3c 100%);
+    padding: 30px;
+    color: #fff;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.back-button {
+    background: rgba(201, 170, 113, 0.2);
+    border: 1px solid #c9aa71;
+    color: #c9aa71;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #c9aa71;
+    color: #0a1428;
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: #f0d98d;
+    margin: 0;
+}
+
+/* Loading */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(201, 170, 113, 0.3);
+    border-top-color: #c9aa71;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error */
+.error {
+    text-align: center;
+    padding: 50px;
+    color: #e74c3c;
+}
+
+.error button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #c9aa71;
+    color: #0a1428;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Content */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Season Overview Card */
+.season-overview {
+    background: linear-gradient(145deg, #2c2416, #3d3120);
+    border: 2px solid #c9aa71;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.rank-display {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(201, 170, 113, 0.3);
+}
+
+.rank-emblem-large {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(201, 170, 113, 0.4));
+    animation: emblem-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes emblem-glow {
+    from {
+        filter: drop-shadow(0 8px 20px rgba(201, 170, 113, 0.4));
+    }
+
+    to {
+        filter: drop-shadow(0 8px 40px rgba(201, 170, 113, 0.7));
+    }
+}
+
+.rank-info h2 {
+    font-size: 2.5rem;
+    color: #f0d98d;
+    margin: 0 0 10px 0;
+}
+
+.season-label {
+    font-size: 1.2rem;
+    color: #888;
+    margin: 0;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.stat-card:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+}
+
+.stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f0d98d;
+    margin-bottom: 8px;
+}
+
+.stat-value.wins {
+    color: #2ecc71;
+}
+
+.stat-value.losses {
+    color: #e74c3c;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Winrate Classes */
+.winrate-high {
+    color: #2ecc71 !important;
+}
+
+.winrate-mid {
+    color: #f0d98d !important;
+}
+
+.winrate-low {
+    color: #e74c3c !important;
+}
+
+/* Multi-Kills Section */
+.multikills-section h3 {
+    color: #c9aa71;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.multikills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.multikill-item {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.kill-count {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.kill-count.double {
+    color: #3498db;
+}
+
+.kill-count.triple {
+    color: #9b59b6;
+}
+
+.kill-count.quadra {
+    color: #e67e22;
+}
+
+.kill-count.penta {
+    color: #e74c3c;
+    text-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+}
+
+.kill-label {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Champions Section */
+.champions-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.champions-section h2 {
+    color: #f0d98d;
+    margin: 0 0 25px 0;
+    font-size: 1.5rem;
+}
+
+.champions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.champion-card {
+    background: linear-gradient(145deg, #1a2a40, #0d1f35);
+    border: 1px solid rgba(201, 170, 113, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.champion-card:hover {
+    border-color: #c9aa71;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.champ-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.champ-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #c9aa71;
+    object-fit: cover;
+}
+
+.champ-info h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.games-count {
+    margin: 5px 0 0 0;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.champ-winrate {
+    margin-left: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.champ-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kda-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.kda {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.kda .deaths {
+    color: #e74c3c;
+}
+
+.cs {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.record {
+    display: flex;
+    gap: 10px;
+}
+
+.record .wins {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.record .losses {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.champ-multikills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.mini-kill {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.mini-kill.double {
+    background: rgba(52, 152, 219, 0.3);
+    color: #3498db;
+}
+
+.mini-kill.triple {
+    background: rgba(155, 89, 182, 0.3);
+    color: #9b59b6;
+}
+
+.mini-kill.quadra {
+    background: rgba(230, 126, 34, 0.3);
+    color: #e67e22;
+}
+
+.mini-kill.penta {
+    background: rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .season-detail-container {
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .rank-display {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .rank-emblem-large {
+        width: 150px;
+        height: 150px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .multikills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .champions-list {
+        grid-template-columns: 1fr;
+    }
+}

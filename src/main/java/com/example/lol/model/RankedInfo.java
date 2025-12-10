@@ -1,0 +1,119 @@
+package com.example.lol.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class RankedInfo {
+    private String queueType; // RANKED_SOLO_5x5, RANKED_FLEX_SR, etc.
+    private String tier; // IRON, BRONZE, SILVER, GOLD, PLATINUM, EMERALD, DIAMOND, MASTER, GRANDMASTER,
+                         // CHALLENGER
+    private String rank; // I, II, III, IV
+    private int leaguePoints;
+    private int wins;
+    private int losses;
+    private boolean hotStreak;
+    private boolean veteran;
+    private boolean freshBlood;
+    private boolean inactive;
+
+    // Getters and Setters
+    public String getQueueType() {
+        return queueType;
+    }
+
+    public void setQueueType(String queueType) {
+        this.queueType = queueType;
+    }
+
+    public String getTier() {
+        return tier;
+    }
+
+    public void setTier(String tier) {
+        this.tier = tier;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    public int getLeaguePoints() {
+        return leaguePoints;
+    }
+
+    public void setLeaguePoints(int leaguePoints) {
+        this.leaguePoints = leaguePoints;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+
+    public boolean isHotStreak() {
+        return hotStreak;
+    }
+
+    public void setHotStreak(boolean hotStreak) {
+        this.hotStreak = hotStreak;
+    }
+
+    public boolean isVeteran() {
+        return veteran;
+    }
+
+    public void setVeteran(boolean veteran) {
+        this.veteran = veteran;
+    }
+
+    public boolean isFreshBlood() {
+        return freshBlood;
+    }
+
+    public void setFreshBlood(boolean freshBlood) {
+        this.freshBlood = freshBlood;
+    }
+
+    public boolean isInactive() {
+        return inactive;
+    }
+
+    public void setInactive(boolean inactive) {
+        this.inactive = inactive;
+    }
+
+    // Convenience methods
+    public String getFullRank() {
+        if (tier == null)
+            return "Unranked";
+        if (tier.equals("MASTER") || tier.equals("GRANDMASTER") || tier.equals("CHALLENGER")) {
+            return tier;
+        }
+        return tier + " " + rank;
+    }
+
+    public int getTotalGames() {
+        return wins + losses;
+    }
+
+    public String getWinRate() {
+        if (getTotalGames() == 0)
+            return "0%";
+        return String.format("%.0f%%", (wins * 100.0 / getTotalGames()));
+    }
+}

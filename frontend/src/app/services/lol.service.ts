@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Champion, ChampionDetail, Item, Match, PlayerInfo } from '../models/lol.model';
+import { Champion, ChampionDetail, Item, Match, PlayerInfo, RankedInfo, SeasonStats } from '../models/lol.model';
 
 @Injectable({
     providedIn: 'root'
@@ -33,5 +33,13 @@ export class LolService {
 
     getFreeRotation(): Observable<Champion[]> {
         return this.http.get<Champion[]>(`${this.apiUrl}/champions/rotation`);
+    }
+
+    getRankedInfo(puuid: string): Observable<RankedInfo[]> {
+        return this.http.get<RankedInfo[]>(`${this.apiUrl}/ranked/${puuid}`);
+    }
+
+    getSeasonStats(puuid: string, season: number): Observable<SeasonStats> {
+        return this.http.get<SeasonStats>(`${this.apiUrl}/season/${puuid}/${season}`);
     }
 }
